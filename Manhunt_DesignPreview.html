@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MANHUNT — Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black:   #0A0A0A;
+    --white:   #F5F0E8;
+    --yellow:  #FFE040;
+    --red:     #FF2D2D;
+    --green:   #00E676;
+    --blue:    #1A6BFF;
+    --orange:  #FF6B00;
+    --gray100: #F0EBE0;
+    --gray300: #C8C0B0;
+    --gray600: #6B6560;
+    --gray900: #1A1714;
+  }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: 'Space Mono', monospace;
+    padding: 40px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .site-header {
+    border: 4px solid var(--black);
+    background: var(--black);
+    padding: 32px;
+    margin-bottom: 48px;
+    box-shadow: 10px 10px 0px var(--yellow);
+    position: relative;
+  }
+  .site-header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 96px;
+    color: var(--yellow);
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .site-header p {
+    color: var(--gray300);
+    font-size: 13px;
+    margin-top: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .tag {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--black);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 4px 12px;
+    border: 2px solid var(--black);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* SECTIONS */
+  .section { margin-bottom: 56px; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gray600);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--black);
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  /* COLOR PALETTE */
+  .palette-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
+  .color-swatch {
+    border: 3px solid var(--black);
+    box-shadow: 5px 5px 0px var(--black);
+    overflow: hidden;
+  }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: 10px; background: var(--white); border-top: 2px solid var(--black); }
+  .swatch-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; }
+  .swatch-hex { font-size: 11px; color: var(--gray600); margin-top: 2px; }
+
+  /* TYPOGRAPHY */
+  .type-row { margin-bottom: 20px; border-bottom: 1px solid var(--gray300); padding-bottom: 20px; }
+  .type-sample-display { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; line-height: 1; }
+  .type-sample-body { font-family: 'Space Mono', monospace; }
+  .type-meta { font-size: 11px; color: var(--gray600); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* BUTTONS */
+  .btn-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 24px;
+    border: 3px solid var(--black);
+    cursor: pointer;
+    transition: transform 80ms, box-shadow 80ms;
+    user-select: none;
+    text-decoration: none;
+  }
+  .btn:active { transform: translate(3px, 3px); box-shadow: none !important; }
+
+  .btn-primary { background: var(--yellow); color: var(--black); box-shadow: 5px 5px 0px var(--black); }
+  .btn-secondary { background: var(--white); color: var(--black); box-shadow: 5px 5px 0px var(--black); }
+  .btn-danger { background: var(--red); color: var(--white); box-shadow: 5px 5px 0px var(--black); }
+  .btn-ghost { background: transparent; color: var(--black); box-shadow: none; }
+  .btn-dark { background: var(--black); color: var(--yellow); box-shadow: 5px 5px 0px var(--yellow); border-color: var(--yellow); }
+
+  /* CARDS */
+  .card-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+  .card {
+    border: 3px solid var(--black);
+    padding: 20px;
+    box-shadow: 6px 6px 0px var(--black);
+  }
+  .card-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; text-transform: uppercase; margin-bottom: 8px; }
+  .card-body { font-size: 13px; color: var(--gray600); line-height: 1.6; }
+  .card-yellow { background: var(--yellow); }
+  .card-red { background: var(--red); color: var(--white); }
+  .card-red .card-body { color: rgba(245,240,232,0.8); }
+  .card-dark { background: var(--black); color: var(--white); box-shadow: 6px 6px 0px var(--yellow); border-color: var(--yellow); }
+  .card-dark .card-body { color: var(--gray300); }
+
+  /* TIMER */
+  .timer-demo {
+    background: var(--black);
+    border: 4px solid var(--yellow);
+    box-shadow: 10px 10px 0px var(--yellow);
+    padding: 32px 40px;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+  .timer-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gray300); margin-bottom: 8px; }
+  .timer-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 88px; color: var(--yellow); line-height: 1; letter-spacing: -2px; }
+  .timer-sub { font-size: 13px; color: var(--gray300); margin-top: 4px; }
+  .timer-warning .timer-value { color: var(--orange); }
+  .timer-critical { border-color: var(--red); box-shadow: 10px 10px 0px var(--red); }
+  .timer-critical .timer-value { color: var(--red); }
+
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border: 2px solid var(--black);
+  }
+  .badge-jagade { background: var(--red); color: var(--white); }
+  .badge-jagande { background: var(--blue); color: var(--white); }
+  .badge-spectator { background: var(--gray300); color: var(--black); }
+
+  /* INPUT */
+  .input-demo {
+    width: 100%;
+    max-width: 320px;
+    padding: 12px 16px;
+    border: 3px solid var(--black);
+    background: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    box-shadow: 4px 4px 0px var(--black);
+    outline: none;
+    transition: border-color 100ms, box-shadow 100ms;
+  }
+  .input-demo:focus { border-color: var(--yellow); box-shadow: 4px 4px 0px var(--yellow); }
+
+  /* MOCK SCREEN */
+  .mock-phone {
+    border: 4px solid var(--black);
+    box-shadow: 12px 12px 0px var(--black);
+    background: var(--black);
+    width: 280px;
+    min-height: 500px;
+    padding: 20px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .mock-phone::before {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 8px;
+    background: var(--gray900);
+    border-radius: 4px;
+    margin: 0 auto 20px;
+  }
+  .mock-screen-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    color: var(--gray300);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+  .mock-clue-card {
+    background: var(--gray900);
+    border: 2px solid var(--yellow);
+    padding: 14px;
+    margin-bottom: 12px;
+    box-shadow: 4px 4px 0px var(--yellow);
+  }
+  .mock-clue-type {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    color: var(--yellow);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .mock-clue-time {
+    font-size: 10px;
+    color: var(--gray300);
+    font-family: 'Space Mono', monospace;
+  }
+  .mock-map-placeholder {
+    background: var(--gray900);
+    border: 2px solid var(--gray600);
+    height: 120px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray600);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+  }
+  .map-pin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 14px;
+    height: 14px;
+    background: var(--red);
+    border: 2px solid var(--white);
+    border-bottom: none;
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+  }
+  .mock-sos {
+    position: absolute;
+    top: 20px;
+    right: 16px;
+    background: var(--red);
+    border: 2px solid var(--white);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 12px;
+    padding: 4px 8px;
+    letter-spacing: 1px;
+  }
+  .mock-timer-mini {
+    background: var(--black);
+    border: 2px solid var(--orange);
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .mock-timer-mini .t-label { font-size: 9px; color: var(--gray300); text-transform: uppercase; letter-spacing: 2px; }
+  .mock-timer-mini .t-val { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 28px; color: var(--orange); line-height: 1; }
+
+  /* SHADOW EXAMPLES */
+  .shadow-row { display: flex; flex-wrap: wrap; gap: 24px; }
+  .shadow-example {
+    width: 80px; height: 80px;
+    background: var(--white);
+    border: 3px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  /* DARK DEMO */
+  .dark-demo {
+    background: var(--black);
+    border: 4px solid var(--yellow);
+    box-shadow: 10px 10px 0px var(--yellow);
+    padding: 32px;
+    margin-bottom: 32px;
+    color: var(--white);
+  }
+  .dark-demo .section-label { color: var(--gray600); border-color: var(--gray600); }
+  .dark-demo .section-title { color: var(--white); }
+  .dark-card {
+    background: var(--gray900);
+    border: 3px solid var(--white);
+    box-shadow: 5px 5px 0px var(--white);
+    padding: 16px;
+    margin-top: 16px;
+  }
+  .dark-card p { color: var(--gray300); font-size: 13px; margin-top: 6px; }
+
+  @media (max-width: 600px) {
+    .site-header h1 { font-size: 64px; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .timer-value { font-size: 64px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <p>Design System v1.0</p>
+  <h1>MANHUNT</h1>
+  <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+    <span class="tag">Neo-Brutalism</span>
+    <span class="tag" style="background:var(--red);color:var(--white);">React Native</span>
+    <span class="tag" style="background:var(--white)">iOS & Android</span>
+  </div>
+</header>
+
+<!-- FÄRGPALETT -->
+<section class="section">
+  <div class="section-label">01 — Färgpalett</div>
+  <div class="section-title">Primära Färger</div>
+  <div class="palette-grid">
+    <div class="color-swatch">
+      <div class="swatch-color" style="background:#0A0A0A"></div>
+      <div class="swatch-info"><div class="swatch-name">hunt-black</div><div class="swatch-hex">#0A0A0A</div></div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-color" style="background:#F5F0E8; border-bottom: 1px solid #ccc"></div>
+      <div class="swatch-info"><div class="swatch-name">hunt-white</div><div class="swatch-hex">#F5F0E8</div></div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-color" style="background:#FFE040"></div>
+      <div class="swatch-info"><div class="swatch-name">hunt-yellow</div><div class="swatch-hex">#FFE040 · Primär</div></div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-color" style="background:#FF2D2D"></div>
+      <div class="swatch-info"><div class="swatch-name">hunt-red</div><div class="swatch-hex">#FF2D2D · Fara</div></div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-color" style="background:#00E676"></div>
+      <div class="swatch-info"><div class="swatch-name">hunt-green</div><div class="swatch-hex">#00E676 · Success</div></div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-color" style="background:#1A6BFF"></div>
+      <div class="swatch-info"><div class="swatch-name">hunt-blue</div><div class="swatch-hex">#1A6BFF · Info</div></div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-color" style="background:#FF6B00"></div>
+      <div class="swatch-info"><div class="swatch-name">hunt-orange</div><div class="swatch-hex">#FF6B00 · Varning</div></div>
+    </div>
+    <div class="color-swatch">
+      <div class="swatch-color" style="background:#C8C0B0"></div>
+      <div class="swatch-info"><div class="swatch-name">gray-300</div><div class="swatch-hex">#C8C0B0 · Disabled</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAFI -->
+<section class="section">
+  <div class="section-label">02 — Typografi</div>
+  <div class="type-row">
+    <div class="type-sample-display" style="font-size:72px; line-height:1;">MANHUNT APP</div>
+    <div class="type-meta">Barlow Condensed 900 Black — Display / Headlines</div>
+  </div>
+  <div class="type-row">
+    <div class="type-sample-display" style="font-size:48px; font-weight:800;">Du är FÅNGAD!</div>
+    <div class="type-meta">Barlow Condensed 800 ExtraBold — Section Titles</div>
+  </div>
+  <div class="type-row">
+    <div class="type-sample-display" style="font-size:28px; font-weight:700;">Ledtråd om 5 minuter!</div>
+    <div class="type-meta">Barlow Condensed 700 Bold — Subheadings / Buttons</div>
+  </div>
+  <div class="type-row">
+    <div class="type-sample-body" style="font-size:16px; line-height:1.6;">Jagade laget har skickat sin ledtråd. Position bekräftad. Vänta 5 minuter i geofence-zonen.</div>
+    <div class="type-meta">Space Mono 400 Regular — Body Text</div>
+  </div>
+  <div class="type-row">
+    <div class="type-sample-body" style="font-size:13px; color: var(--gray600);">SESSIONSKOD: XK-7429  |  14:32:05</div>
+    <div class="type-meta">Space Mono 400 — Metadata / Labels / Koder</div>
+  </div>
+</section>
+
+<!-- TIMERS -->
+<section class="section">
+  <div class="section-label">03 — Timer-komponenter</div>
+  <div style="display:flex; flex-wrap:wrap; gap:24px; margin-bottom:16px;">
+    <div>
+      <div class="timer-demo">
+        <div class="timer-label">Nästa ledtråd</div>
+        <div class="timer-value">24:38</div>
+        <div class="timer-sub">PIN — Plats-delning</div>
+      </div>
+      <div class="timer-sub" style="color:var(--gray600); margin-top:8px; font-size:11px;">Normal state</div>
+    </div>
+    <div>
+      <div class="timer-demo timer-warning">
+        <div class="timer-label">Nästa ledtråd</div>
+        <div class="timer-value">04:12</div>
+        <div class="timer-sub">FOTO — Kamera krävs</div>
+      </div>
+      <div class="timer-sub" style="color:var(--gray600); margin-top:8px; font-size:11px;">Varning (&lt;5 min)</div>
+    </div>
+    <div>
+      <div class="timer-demo timer-critical">
+        <div class="timer-label">SKICKA NU</div>
+        <div class="timer-value">00:07</div>
+        <div class="timer-sub">VIDEO — Pågår!</div>
+      </div>
+      <div class="timer-sub" style="color:var(--gray600); margin-top:8px; font-size:11px;">Kritisk (&lt;10 sek)</div>
+    </div>
+  </div>
+  <!-- Strafftid -->
+  <div style="display:inline-block; background: var(--red); border: 3px solid var(--black); box-shadow: 6px 6px 0px var(--black); padding: 16px 24px; margin-top:8px;">
+    <div class="timer-label" style="color:rgba(245,240,232,0.7);">Strafftid</div>
+    <div style="font-family:'Barlow Condensed'; font-weight:900; font-size:48px; color:var(--white); line-height:1;">+1:20</div>
+    <div class="timer-sub" style="color:rgba(245,240,232,0.7);">16 sek för sent · 6 × 10 sek</div>
+  </div>
+</section>
+
+<!-- KNAPPAR -->
+<section class="section">
+  <div class="section-label">04 — Knappar</div>
+  <div class="btn-row">
+    <button class="btn btn-primary">Starta spel</button>
+    <button class="btn btn-secondary">Avbryt</button>
+    <button class="btn btn-danger">🚨 SOS</button>
+    <button class="btn btn-dark">Fångade!</button>
+    <button class="btn btn-ghost">Mer info</button>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-primary" style="font-size:24px; padding:16px 40px;">SKICKA LEDTRÅD</button>
+    <button class="btn btn-secondary" style="font-size:13px; padding:8px 16px;">Lämna match</button>
+  </div>
+</section>
+
+<!-- KORT -->
+<section class="section">
+  <div class="section-label">05 — Kort & Ytor</div>
+  <div class="card-row">
+    <div class="card" style="background:var(--white);">
+      <div class="card-title">Standard Kort</div>
+      <div class="card-body">Bakgrund: hunt-white. Används för spelarkort, infoboxar och inställningar.</div>
+    </div>
+    <div class="card card-yellow">
+      <div class="card-title">Aktiv Händelse</div>
+      <div class="card-body">Gul bakgrund används när något kräver omedelbar uppmärksamhet.</div>
+    </div>
+    <div class="card card-red">
+      <div class="card-title">Fara / Strafftid</div>
+      <div class="card-body">Röd används för strafftid, fence-brott och varningar.</div>
+    </div>
+    <div class="card card-dark">
+      <div class="card-title">Mörkt Kort</div>
+      <div class="card-body">Dark mode version med gul border och skugga.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BADGES -->
+<section class="section">
+  <div class="section-label">06 — Lag-badges & Status</div>
+  <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:20px;">
+    <span class="badge badge-jagade">● Jagade</span>
+    <span class="badge badge-jagande">● Jagande</span>
+    <span class="badge badge-spectator">● Spectator</span>
+    <span class="badge" style="background:var(--green); color:var(--black);">✓ Klarade sig!</span>
+    <span class="badge" style="background:var(--orange); color:var(--black);">⚠ Strafftid</span>
+    <span class="badge" style="background:var(--black); color:var(--yellow);">🔒 Geofence</span>
+  </div>
+</section>
+
+<!-- SKUGGOR -->
+<section class="section">
+  <div class="section-label">07 — Neo-Brutalist Skuggor</div>
+  <div class="shadow-row">
+    <div class="shadow-example" style="box-shadow: 3px 3px 0px var(--black);">Shadow<br>SM<br>3px</div>
+    <div class="shadow-example" style="box-shadow: 5px 5px 0px var(--black);">Shadow<br>MD<br>5px</div>
+    <div class="shadow-example" style="box-shadow: 8px 8px 0px var(--black);">Shadow<br>LG<br>8px</div>
+    <div class="shadow-example" style="box-shadow: 12px 12px 0px var(--black);">Shadow<br>XL<br>12px</div>
+    <div class="shadow-example" style="box-shadow: 5px 5px 0px var(--yellow);">Yellow<br>Shadow</div>
+    <div class="shadow-example" style="box-shadow: 5px 5px 0px var(--red);">Red<br>Shadow</div>
+    <div class="shadow-example" style="box-shadow: 5px 5px 0px var(--green);">Green<br>Shadow</div>
+  </div>
+</section>
+
+<!-- INPUT -->
+<section class="section">
+  <div class="section-label">08 — Input-fält</div>
+  <div style="display:flex; flex-wrap:wrap; gap:16px;">
+    <input class="input-demo" placeholder="Ange sessionskod..." type="text">
+    <input class="input-demo" placeholder="Ditt spelarnamn..." type="text" value="JLC_Simon">
+  </div>
+</section>
+
+<!-- DARK MODE PREVIEW -->
+<section class="section">
+  <div class="section-label">09 — Dark Mode</div>
+  <div class="dark-demo">
+    <div class="section-label" style="color:var(--gray600); border-color:var(--gray600);">Dark Mode Preview</div>
+    <div class="section-title" style="color:var(--yellow);">MANHUNT</div>
+    <div style="display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;">
+      <span class="badge badge-jagade">● Jagade (2)</span>
+      <span class="badge badge-jagande">● Jagande (3)</span>
+    </div>
+    <div class="dark-card">
+      <div class="card-title" style="color:var(--white);">📍 PIN — Ledtråd #4</div>
+      <p>Skickades 14:32 — 2.3 km från start</p>
+    </div>
+    <div class="dark-card" style="border-color:var(--yellow); box-shadow:5px 5px 0px var(--yellow);">
+      <div class="card-title" style="color:var(--yellow);">📷 FOTO — Ledtråd #5</div>
+      <p>Nästa om 18 minuter — Strafftid: +1:20</p>
+    </div>
+    <div style="margin-top:20px;">
+      <button class="btn btn-primary" style="margin-right:12px;">Chatt (3)</button>
+      <button class="btn btn-danger">🚨 SOS</button>
+    </div>
+  </div>
+</section>
+
+<!-- MOCK PHONE SCREEN -->
+<section class="section">
+  <div class="section-label">10 — App-skärm Mockup</div>
+  <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-start;">
+
+    <div>
+      <p style="font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--gray600); margin-bottom:12px;">Jagande — Live View</p>
+      <div class="mock-phone">
+        <div class="mock-sos">SOS</div>
+        <div class="mock-screen-title">Jagande · Session XK-7429</div>
+        <div class="mock-map-placeholder">
+          <div class="map-pin"></div>
+          Karta
+        </div>
+        <div class="mock-timer-mini">
+          <div class="t-label">Nästa ledtråd om</div>
+          <div class="t-val" style="color:var(--orange)">04:22</div>
+        </div>
+        <div class="mock-clue-card">
+          <div class="mock-clue-type">📍 PIN — Ledtråd #4</div>
+          <div class="mock-clue-time">14:32:05 — 2.3 km härifrån</div>
+        </div>
+        <div class="mock-clue-card" style="border-color:var(--gray600); box-shadow:none; opacity:0.6;">
+          <div class="mock-clue-type" style="color:var(--gray300)">📷 FOTO — Ledtråd #3</div>
+          <div class="mock-clue-time">14:02:31</div>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:12px;">
+          <button class="btn btn-primary" style="font-size:13px; padding:8px 12px; flex:1">Karta</button>
+          <button class="btn btn-secondary" style="font-size:13px; padding:8px 12px; flex:1">Chatt</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p style="font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--gray600); margin-bottom:12px;">Jagade — Geofence Väntan</p>
+      <div class="mock-phone">
+        <div class="mock-sos">SOS</div>
+        <div class="mock-screen-title">Jagade · Vänta här!</div>
+        <div style="background:var(--red); border:2px solid var(--white); padding:16px; text-align:center; margin-bottom:12px; box-shadow:4px 4px 0px rgba(245,240,232,0.3);">
+          <div style="font-size:9px; color:rgba(245,240,232,0.7); letter-spacing:3px; text-transform:uppercase; margin-bottom:4px;">Strafftid pålagd</div>
+          <div style="font-family:'Barlow Condensed'; font-weight:900; font-size:36px; color:var(--white); line-height:1;">+1:20</div>
+        </div>
+        <div style="background:var(--gray900); border:2px solid var(--gray600); padding:14px; margin-bottom:12px; text-align:center;">
+          <div style="font-size:9px; color:var(--gray300); letter-spacing:3px; text-transform:uppercase; margin-bottom:4px;">Stanna i zonen</div>
+          <div style="font-family:'Barlow Condensed'; font-weight:900; font-size:48px; color:var(--yellow); line-height:1;">06:20</div>
+          <div style="font-size:10px; color:var(--gray300); margin-top:4px;">5:00 + 1:20 strafftid</div>
+        </div>
+        <div class="mock-clue-card">
+          <div class="mock-clue-type">📷 FOTO skickat!</div>
+          <div class="mock-clue-time">16 sek för sent → +1:20 strafftid</div>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:12px;">
+          <button class="btn btn-secondary" style="font-size:13px; padding:8px 12px; flex:1">Karta</button>
+          <button class="btn" style="background:var(--yellow);color:var(--black);font-size:13px;padding:8px 12px;flex:1;border:2px solid var(--black)">Chatt</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top: 3px solid var(--black); padding-top: 24px; margin-top: 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+  <div style="font-family:'Barlow Condensed'; font-weight:900; font-size:28px; color:var(--black);">MANHUNT</div>
+  <div style="font-size:11px; color:var(--gray600); text-transform:uppercase; letter-spacing:2px;">Design System v1.0 — Neo-Brutalism</div>
+</footer>
+
+</body>
+</html>
